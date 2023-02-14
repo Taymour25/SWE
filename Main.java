@@ -54,12 +54,20 @@ boolean check(){
   if(board[0][2]=="X" &&board[1][2]=="X" &&board[2][2]=="X" ||board[0][2]=="0" &&board[1][2]=="0" &&board[2][2]=="0" ){
     return true;
   }
+   if(board[2][2]=="X" &&board[1][1]=="X" &&board[0][0]=="X" ||board[0][0]=="0" &&board[1][1]=="0" &&board[2][2]=="0" ){
+    return true;
+  }
+  if(board[0][2]=="X" &&board[1][1]=="X" &&board[2][0]=="X" ||board[2][0]=="0" &&board[1][1]=="0" &&board[0][2]=="0" ){
+    return true;
+  }
   return false;
 }
 void GameManager(){
+  int turns=0;
   printboard();
   while(true){
     add();
+    turns++;
     printboard();
     if(check()){
       if(player){
@@ -67,6 +75,10 @@ void GameManager(){
       }else{
         System.out.println("X WON !");
       }
+      break;
+    }
+    if(turns==9){
+      System.out.println("TIE !");
       break;
     }
   }
