@@ -17,7 +17,8 @@ public class Main {
   }
 }
 
-class Game{
+class Board{
+  int turns=0;
   Scanner scanner=new Scanner(System.in);
   String[][] board = {{"-","-","-"},{"-","-","-"},{"-","-","-"}};
   boolean player=true;
@@ -32,8 +33,10 @@ class Game{
     if(board[a][b]=="-"){
       if(player){
         board[a][b]="X";
+        turns++;
       }else{
         board[a][b]="0";
+        turns++;
       }
     }else{
       System.out.println("Invalid Input !");
@@ -75,23 +78,23 @@ class Game{
 }
 
 class  GameManager{       //Game management class
-  Game xo=new Game();
-  int turns=0;
+  Board xo=new Board();
+  player player1= new player();
+  player player2= new player();
   void managegame(){
     xo.printboard();
     while(true){
       xo.add();
-      turns++;
       xo.printboard();
       if(xo.check()){
         if(xo.player){
-          System.out.println("0 WON !");
+          System.out.println(player2.playername + " WON !");
         }else{
-          System.out.println("X WON !");
+          System.out.println(player2.playername+ " WON !");
         }
         break;
       }
-      if(turns==9){
+      if(xo.turns==9){
         System.out.println("TIE !");
         break;
       }
@@ -99,4 +102,15 @@ class  GameManager{       //Game management class
 
   }
 
+}
+
+class player{
+  String playername;
+  char item;
+  player(){
+    Scanner scanner=new Scanner(System.in);
+    System.out.println("ADD YOUR NAME HERE : ");
+    String username=scanner.nextLine();
+    playername=username;
+  }
 }
